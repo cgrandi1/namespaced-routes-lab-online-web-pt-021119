@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+
   def index
     @artists = Artist.all
   end
@@ -8,7 +9,10 @@ class ArtistsController < ApplicationController
   end
 
   def new
+    redirect_to artists_path unless Preference.first.allow_create_artists
+    #check if allow_create_artists is flase we redirect to the page artists_path
     @artist = Artist.new
+    
   end
 
   def create
